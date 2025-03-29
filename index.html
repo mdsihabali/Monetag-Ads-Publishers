@@ -3,21 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Time-Based Redirect</title>
+    <title>Auto Time-Based Redirect</title>
     <script>
         function redirectBasedOnTime() {
-            const now = new Date();
-            const hours = now.getHours();
-            const minutes = now.getMinutes();
-            const currentTime = hours * 60 + minutes; // Convert time to total minutes
+            const links = [
+                { url: "https://x1.com", status: "active" },
+                { url: "https://x2.com", status: "active" },
+                { url: "https://x3.com", status: "inactive" },
+                { url: "https://x4.com", status: "active" }
+            ];
 
-            if (currentTime >= 17 * 60 + 1 && currentTime <= 19 * 60 + 23) { // 05:01 PM - 07:00 PM
-                window.location.href = "x.com";
-            } else if (currentTime >= 19 * 60 + 31 && currentTime <= 20 * 60 + 1) { // 07:01 PM - 08:01 PM
-                window.location.href = "https://maftoomp.top/4/9148634";
-            } else {
-                document.body.innerHTML = "<h2>No link available for the current time.</h2>";
+            // Filter only active links
+            const activeLinks = links.filter(link => link.status === "active");
+
+            const totalActive = activeLinks.length;
+            if (totalActive === 0) {
+                document.body.innerHTML = "<h2>No active links available.</h2>";
+                return;
             }
+
+            const durationPerLink = (24 * 60) / totalActive; // Auto duration in minutes
+            const now = new Date();
+            const totalMinutes = now.getHours() * 60 + now.getMinutes(); // Minutes since start of the day
+
+            const currentIndex = Math.floor(totalMinutes / durationPerLink) % totalActive; // Find the active link index
+            window.location.href = activeLinks[currentIndex].url; // Redirect to the correct link
         }
 
         window.onload = redirectBasedOnTime;
