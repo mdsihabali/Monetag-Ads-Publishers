@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time-Based Redirect</title>
+    <script>
+        function redirectBasedOnTime() {
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const currentTime = hours * 60 + minutes; // Convert time to total minutes
+
+            if (currentTime >= 17 * 60 + 1 && currentTime <= 19 * 60) { // 05:01 PM - 07:00 PM
+                window.location.href = "https://tinyurl.com/mhjn4psm";
+            } else if (currentTime >= 19 * 60 + 1 && currentTime <= 20 * 60 + 1) { // 07:01 PM - 08:01 PM
+                window.location.href = "https://maftoomp.top/4/9148634";
+            } else {
+                document.body.innerHTML = "<h2>No link available for the current time.</h2>";
+            }
+        }
+
+        window.onload = redirectBasedOnTime;
+    </script>
+</head>
+<body>
+</body>
+</html>
